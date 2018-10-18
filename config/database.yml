@@ -49,7 +49,7 @@ test:
 #
 production:
   <<: *default
-  # database: <%= ENV['CLEAR_DB'] %>
-  url: <%= ENV['CLEAR_DB_URL'] %>
-  username: <%= ENV['CLEAR_DB_USERNAME'] %>
-  password: <%= ENV['HANGMAN_RAILS_BACKEND_DATABASE_PASSWORD'] %>
+  host: <%= ENV['CLEAR_DB_HOST'] %> 
+  username: <%= ENV['CLEAR_DB_USERNAME'] %> 
+  password: <%= ENV['CLEAR_DB_PASSWORD'] %> 
+  database: <%= ENV['CLEAR_DB'] %> 
