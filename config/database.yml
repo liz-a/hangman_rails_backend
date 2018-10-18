@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: hangman_rails_backend_production
-  username: hangman_rails_backend
+  database: <%= ENV['CLEAR_DB'] %>
+  username: <%= ENV['CLEAR_DB_USERNAME'] %>
   password: <%= ENV['HANGMAN_RAILS_BACKEND_DATABASE_PASSWORD'] %>
