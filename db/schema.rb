@@ -12,4 +12,35 @@
 
 ActiveRecord::Schema.define(version: 0) do
 
+  create_table "games", force: :cascade do |t|
+    t.string "game_name"
+    t.string "word"
+    t.integer "lives"
+    t.integer "status"
+    t.integer "result"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string "slack_name"
+    t.string "slack_id"
+    t.integer "game_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "active_game_on_game_id"
+    t.index ["game_id"], name: "player_games_on_game_id"
+  end
+
+  create_table "guesses", force: :cascade do |t|
+    t.string "slack_name"
+    t.string "slack_id"
+    t.integer "game_id"
+    t.string "guess"
+    t.boolean "correct_or_incorrect"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "guesses_on_game_id"
+  end
+
 end
