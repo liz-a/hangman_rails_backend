@@ -25,8 +25,6 @@ class GuessesController < ApplicationController
   # POST /guesses.json
   def create
     @guess = Guess.new(guess_params)
-    @guess_params = guess_params
-
 
     respond_to do |format|
       if @guess.save
