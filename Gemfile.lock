@@ -86,6 +86,8 @@ GEM
       excon
       moneta
       multi_json (>= 1.9.2)
+    httparty (0.16.2)
+      multi_xml (>= 0.5.2)
     i18n (1.1.1)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
@@ -111,6 +113,7 @@ GEM
     moneta (1.0.0)
     msgpack (1.2.4)
     multi_json (1.13.1)
+    multi_xml (0.6.0)
     mysql2 (0.5.2)
     nio4r (2.3.1)
     nokogiri (1.8.5)
@@ -226,6 +229,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
+  httparty
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   mysql2 (>= 0.4.4, < 0.6.0)

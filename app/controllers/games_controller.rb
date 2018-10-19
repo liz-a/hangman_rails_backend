@@ -26,7 +26,13 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
 
-    @game = Game.new(game_params)
+    Rails.logger.info '*' * 100
+
+    Rails.logger.info game_data.inspect
+    Rails.logger.info params.inspect
+    Rails.logger.info '*' * 100
+
+    @game = Game.new(game_data)
 
     @game_params = game_params
 
