@@ -26,8 +26,7 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
 
-    
-    @game = Game.new(game_params[:body])
+    @game = Game.new(game_params)
 
     @game_params = game_params
 
