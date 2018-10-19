@@ -69,6 +69,6 @@ class PlayersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def player_params
-      params.require(:player).permit(:slack_name, :slack_id, :game_id, :active_game, :player_games)
+      params.require(:player).permit(:slack_name, :slack_id, :active_game)
     end
 end

@@ -24,11 +24,14 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
+
     @game = Game.new(game_params)
+
+    @game_params = game_params
 
     respond_to do |format|
       if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
+        format.html { redirect_to @game, notice: "Game was successfully created. #{@game_params}" }
         format.json { render :show, status: :created, location: @game }
       else
         format.html { render :new }
