@@ -1,4 +1,4 @@
 class Game < ApplicationRecord
-  has_many :players
-  has_many :guesses
+  # has_many :players
+  # has_many :guesses
 end
