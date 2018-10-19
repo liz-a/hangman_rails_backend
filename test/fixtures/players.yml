@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  slack_name: MyString
+  slack_id: MyString
+  game_id: 1
+  active_game: 1
+  player_games: 1
+
+two:
+  slack_name: MyString
+  slack_id: MyString
+  game_id: 1
+  active_game: 1
+  player_games: 1

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  game_name: MyString
+  word: MyString
+  lives: 1
+  status: 1
+  result: 1
+
+two:
+  game_name: MyString
+  word: MyString
+  lives: 1
+  status: 1
+  result: 1

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  guess: MyString
+  game_id: 1
+  correct_or_incorrect: 1
+
+two:
+  guess: MyString
+  game_id: 1
+  correct_or_incorrect: 1

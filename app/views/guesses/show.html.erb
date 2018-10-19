@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Guess:</strong>
+  <%= @guess.guess %>
+</p>
+
+<p>
+  <strong>Game:</strong>
+  <%= @guess.game_id %>
+</p>
+
+<p>
+  <strong>Correct or incorrect:</strong>
+  <%= @guess.correct_or_incorrect %>
+</p>
+
+<%= link_to 'Edit', edit_guess_path(@guess) %> |
+<%= link_to 'Back', guesses_path %>
