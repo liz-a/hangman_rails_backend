@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :guesses
   resources :players
   resources :games
-  post "/slack", to: "slack#get_input"
+  # post "/slack", to: "slack#get_input"
 
   # post "/slack", to: "games#create", constraint: SlackCreateGameConstraint.new
   # post "/slack", to: "guesses#update", constraint: SlackGuessConstraint.new

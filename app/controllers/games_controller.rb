@@ -26,17 +26,9 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
 
-    Rails.logger.info '*' * 100
-
-    Rails.logger.info game_data.inspect
-    Rails.logger.info params.inspect
-    Rails.logger.info '*' * 100
-
-    @game = Game.new(game_data)
+    @game = Game.new(game_params)
 
     @game_params = game_params
-
-
 
     respond_to do |format|
       if @game.save
@@ -47,6 +39,7 @@ class GamesController < ApplicationController
         format.json { render json: @game.errors, status: :unprocessable_entity }
       end
     end
+    
   end
 
   # PATCH/PUT /games/1
