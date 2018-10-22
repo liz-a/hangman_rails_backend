@@ -51,8 +51,14 @@ class GamesController < ApplicationController
 
 
     if @game.save
-      player = Player.exists?(slack_id: "#{slack_id}" )
-      render :json => {game_id: "#{@game.id}", player: "#{player}"}
+      player = Player.exists?(slack_id: "#{slack_id}")
+      if player
+        player_records = Player.find_by(slack_id: "#{slack_id}")
+        Rails.logger.info player_records["id"].inspect
+        render :json => {game_id: "#{@game.id}", player: "#{player}", player_id: "#{player_records["id"]}"}
+      else
+        render :json => {game_id: "#{@game.id}", player: "#{player}"}
+      end
     else
       render json: @game.errors, status: :unprocessable_entity
     end
