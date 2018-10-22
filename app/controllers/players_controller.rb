@@ -1,5 +1,6 @@
 class PlayersController < ApplicationController
   before_action :set_player, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
 
   # GET /players
   # GET /players.json
@@ -24,7 +25,15 @@ class PlayersController < ApplicationController
   # POST /players
   # POST /players.json
   def create
-    @player = Player.new(player_params)
+
+    Rails.logger.info '*' * 100
+    Rails.logger.info params.inspect
+    Rails.logger.info '*' * 100
+
+    slack_id = params["slack_id"]
+    slack_name = params["slack_name"]
+
+    @player = Player.new({"slack_name"=>"#{slack_name}","slack_id"=>"#{slack_id}","active_game"=>"1"})
 
     respond_to do |format|
       if @player.save

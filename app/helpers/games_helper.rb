@@ -1,10 +1,22 @@
 require "faker"
 
 module GamesHelper
-    def new_game_data(name)
-      word = Faker::Verb.base
-      {"game_name"=>name, "word"=>word, "lives"=>"13", "status"=>"1"}
+  class GenerateGame
+    def initialize(game_name)
+      @game_name = game_name
+      @word = Faker::Verb.base
+      @guesses = []
     end
-    def game_setup(game_name, word, lives, guesses)
+    def new_game_data
+      {"game_name"=>@game_name, "word"=>@word, "lives"=>"13", "status"=>"1"}
     end
+    def display_word_state
+      display = @word.chars.map { |char| char = "?" }.join(" ") 
+      
+      display + " WORD: #{@word}"
+    end
+  end
+  def generate_game(game_name)
+    GenerateGame.new(game_name)
+  end
 end
