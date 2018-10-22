@@ -31,6 +31,8 @@ class GamesController < ApplicationController
   def create
     new_game = helpers.generate_game(game_params["game_name"])
 
+    slack_id = params["slack_id"]
+
     response_url = params["response_url"]
 
     @game = Game.new(new_game.new_game_data)
@@ -46,8 +48,11 @@ class GamesController < ApplicationController
       }
     )
 
+
+
     if @game.save
-      render :json => @game
+      player = Player.exists?(slack_id: "#{slack_id}" )
+      render :json => {game_id: "#{@game.id}", player: "#{player}"}
     else
       render json: @game.errors, status: :unprocessable_entity
     end
