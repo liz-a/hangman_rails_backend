@@ -51,7 +51,10 @@ class PlayersController < ApplicationController
   # PATCH/PUT /players/1.json
   def update
     respond_to do |format|
-      if @player.update(player_params)
+      slack_id = params["slack_id"]
+      slack_name = params["slack_name"]
+      active_game = params["game_id"]
+      if @player.update({slack_id: "#{slack_id}", slack_name: "#{slack_name}", active_game: "#{active_game}"})
         format.html { redirect_to @player, notice: 'Player was successfully updated.' }
         format.json { render :show, status: :ok, location: @player }
       else
