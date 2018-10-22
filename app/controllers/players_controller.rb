@@ -32,8 +32,9 @@ class PlayersController < ApplicationController
 
     slack_id = params["slack_id"]
     slack_name = params["slack_name"]
+    game_id = params["game_id"]
 
-    @player = Player.new({"slack_name"=>"#{slack_name}","slack_id"=>"#{slack_id}","active_game"=>"1"})
+    @player = Player.new({"slack_name"=>"#{slack_name}","slack_id"=>"#{slack_id}","active_game"=>"#{game_id}"})
 
     respond_to do |format|
       if @player.save
