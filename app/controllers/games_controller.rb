@@ -2,6 +2,8 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_authenticity_token
 
+  # include GamesHelper
+
   # GET /games
   # GET /games.json
   def index
@@ -26,13 +28,15 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
 
-    @game = Game.new(game_params)
+    new_game = helpers.new_game_data(game_params["game_name"])
+
+    @game = Game.new(new_game)
 
     @game_params = game_params
 
     respond_to do |format|
       if @game.save
-        format.html { redirect_to @game, notice: "Game was successfully created. #{@game_params}" }
+        format.html { redirect_to @game, notice: "Game was successfully created. #{@game_params} #{new_game}" }
         format.json { render :show, status: :created, location: @game }
       else
         format.html { render :new }
