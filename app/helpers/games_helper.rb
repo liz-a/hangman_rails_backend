@@ -5,4 +5,6 @@ module GamesHelper
       word = Faker::Verb.base
       {"game_name"=>name, "word"=>word, "lives"=>"13", "status"=>"1"}
     end
+    def game_setup(game_name, word, lives, guesses)
+    end
 end

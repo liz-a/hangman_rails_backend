@@ -1,3 +1,5 @@
+require 'httparty'
+
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_authenticity_token
@@ -29,8 +31,16 @@ class GamesController < ApplicationController
   def create
 
     new_game = helpers.new_game_data(game_params["game_name"])
+    response_url = params["response_url"]
 
     @game = Game.new(new_game)
+
+    response = HTTParty.post(response_url, 
+    body: {"text" => "FROM BE","response_type" => "in_channel"}.to_json,
+    headers: {
+      "Content-Type" => "application/json"
+    }
+    )
 
     @game_params = game_params
 
@@ -78,6 +88,6 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.require(:game).permit(:game_name, :word, :lives, :status, :result)
+      params.require(:game).permit(:game_name, :word, :lives, :status, :result )
     end
 end
