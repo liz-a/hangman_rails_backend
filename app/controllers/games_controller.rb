@@ -29,10 +29,6 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-    Rails.logger.info '&' * 100
-    Rails.logger.info game_params["game_name"].inspect
-    Rails.logger.info '&' * 100
-    
     new_game = helpers.generate_game(game_params["game_name"])
 
     response_url = params["response_url"]
@@ -41,31 +37,20 @@ class GamesController < ApplicationController
 
     word_blanks = new_game.display_word_state
 
-    response = HTTParty.post(response_url, 
-    body: {"text" => "#{word_blanks}","response_type" => "in_channel"}.to_json,
-    headers: {
-      "Content-Type" => "application/json"
-    }
+    HTTParty.post(response_url, 
+      {
+        body: {"text" => "#{word_blanks}","response_type" => "in_channel"}.to_json,
+        headers: {
+          "Content-Type" => "application/json"
+        }
+      }
     )
 
-
-
-    respond_to do |format|
-      if @game.save
-
-        Rails.logger.info 'J' * 100
-        Rails.logger.info @game.to_json.inspect
-        Rails.logger.info 'J' * 100
-
-
-        # format.html { redirect_to @game, notice: "Game was successfully created. #{new_game}" }
-        format.json { render :json => @game.to_json }
-      else
-        format.html { render :new }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
-      end
+    if @game.save
+      render :json => @game
+    else
+      render json: @game.errors, status: :unprocessable_entity
     end
-    
   end
 
   # PATCH/PUT /games/1
