@@ -12,7 +12,7 @@ module GuessesHelper
     end
 
     def update_word_display
-      # Rails.logger.info 'UPDATE STARTED'
+
       correct_guesses = Guess.where(game_id: @game_id, correct_or_incorrect: "1")
       array_of_correct_guesses = correct_guesses.to_a.map! { |entry| entry["guess"] }
 
