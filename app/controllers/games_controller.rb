@@ -67,6 +67,7 @@ class GamesController < ApplicationController
         }
       }
     )
+    
   end
 
   # PATCH/PUT /games/1
