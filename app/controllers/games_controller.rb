@@ -15,6 +15,7 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
+    
   end
 
   # GET /games/new
@@ -26,10 +27,16 @@ class GamesController < ApplicationController
   def edit
   end
 
+  # GET /games/exists/game_name
+  def exists
+    game_exists = Game.exists?(game_name: "#{params["game_name"]}")
+    render :json => {game_exists: "#{game_exists}"}
+  end
+
   # POST /games
   # POST /games.json
   def create
-    new_game = helpers.generate_game(game_params["game_name"])
+    new_game = helpers.generate_game(params["game_name"])
 
     slack_id = params["slack_id"]
 
@@ -60,8 +67,6 @@ class GamesController < ApplicationController
         }
       }
     )
-
-
   end
 
   # PATCH/PUT /games/1

@@ -19,7 +19,6 @@ module GamesHelper
       generate_initial_word_display
       # if join, just retrieve game display from game and display
     end
-
   end
   def generate_game(game_name)
     GenerateGame.new(game_name)
