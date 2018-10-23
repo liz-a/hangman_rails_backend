@@ -46,22 +46,19 @@ class GuessesController < ApplicationController
     guess_handler = helpers.generate_guess_handler(game_id,guess)
 
     @guess = Guess.new({ guess: "#{guess}", game_id: "#{game_id}", correct_or_incorrect: "#{guess_handler.guess_correct?}" })
-
-    respond_to do |format|
-      if @guess.save
-        format.html { redirect_to @guess, notice: 'Guess was successfully created.' }
-        format.json { render :show, status: :created, location: @guess }
+    
+    if @guess.save
+      if guess_handler.guess_correct? == 1
+        guess_handler.update_word_display
+        guess_handler.check_for_win
       else
-        format.html { render :new }
-        format.json { render json: @guess.errors, status: :unprocessable_entity }
+        guess_handler.update_guessed_letters
+        guess_handler.update_lives
+        guess_handler.check_for_lose
       end
-    end
-
-    if guess_handler.guess_correct? == 1
-      guess_handler.update_word_display
+      render :json => guess_handler.display
     else
-      guess_handler.update_guessed_letters
-      guess_handler.update_lives
+      render json: @guess.errors, status: :unprocessable_entity
     end
     
   end

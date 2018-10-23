@@ -4,7 +4,7 @@ module GamesHelper
   class GenerateGame
     def initialize(game_name)
       @game_name = game_name
-      @word = Faker::Verb.base
+      @word = Faker::Verb.base.upcase
     end
     def new_game_data
       {"game_name"=>@game_name, "word"=>@word, "lives"=>"13", "status"=>"1"}
