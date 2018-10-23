@@ -50,10 +50,6 @@ class PlayersController < ApplicationController
   # PATCH/PUT /players/1
   # PATCH/PUT /players/1.json
   def update
-    Rails.logger.info '!' * 100
-    Rails.logger.info "I'M HEREERERERE"
-    Rails.logger.info '!' * 100
-
     respond_to do |format|
       slack_id = params["slack_id"]
       slack_name = params["slack_name"]

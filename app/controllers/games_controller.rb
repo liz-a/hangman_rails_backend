@@ -37,19 +37,6 @@ class GamesController < ApplicationController
 
     @game = Game.new(new_game.new_game_data)
 
-    word_blanks = new_game.display_word_state
-
-    HTTParty.post(response_url, 
-      {
-        body: {"text" => "#{word_blanks}","response_type" => "in_channel"}.to_json,
-        headers: {
-          "Content-Type" => "application/json"
-        }
-      }
-    )
-
-
-
     if @game.save
       player = Player.exists?(slack_id: "#{slack_id}")
       if player
@@ -62,6 +49,19 @@ class GamesController < ApplicationController
     else
       render json: @game.errors, status: :unprocessable_entity
     end
+
+    word_blanks = new_game.display_word_state
+
+    HTTParty.post(response_url, 
+      {
+        body: {"text" => "#{word_blanks}","response_type" => "in_channel"}.to_json,
+        headers: {
+          "Content-Type" => "application/json"
+        }
+      }
+    )
+
+
   end
 
   # PATCH/PUT /games/1
