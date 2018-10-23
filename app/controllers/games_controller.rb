@@ -103,3 +103,4 @@ class GamesController < ApplicationController
       params.require(:game).permit(:game_name, :word, :lives, :status, :result )
     end
 end
+
