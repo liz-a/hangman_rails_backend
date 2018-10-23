@@ -57,8 +57,13 @@ class GuessesController < ApplicationController
       end
     end
 
-    guess_handler.update_word_display
-
+    if guess_handler.guess_correct? == 1
+      guess_handler.update_word_display
+    else
+      guess_handler.update_guessed_letters
+      guess_handler.update_lives
+    end
+    
   end
 
   # PATCH/PUT /guesses/1

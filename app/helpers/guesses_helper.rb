@@ -23,14 +23,25 @@ module GuessesHelper
       @game = Game.find(@game_id)
       @game.update(word_display: "#{word_display}")
 
+      # TRIGGER WIN IF WIN
+
     end
     
     def update_guessed_letters
       incorrect_guesses = Guess.where(game_id: @game_id, correct_or_incorrect: "0")
       array_of_incorrect_guesses = incorrect_guesses.to_a.map! { |entry| entry["guess"] }
+
+      @game = Game.find(@game_id)
+      @game.update(guessed_letters_display: "GUESSED: #{array_of_incorrect_guesses.join(" ")}")
+
     end
 
     def update_lives
+      @game = Game.find(@game_id)
+      lives = @game["lives"] - 1
+      @game.update(lives: lives)
+
+      # TRIGGER LOSE IF LOSE
     end
 
     def display
