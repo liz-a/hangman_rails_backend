@@ -25,27 +25,11 @@ class GuessesController < ApplicationController
   # GET /guesses/exists/slack_id/guess
   def exists
 
-    Rails.logger.info '*' * 100
-    Rails.logger.info params.inspect
-    Rails.logger.info '*' * 100
-
     player_records = Player.find_by(slack_id: "#{params["slack_id"]}")
-
-    Rails.logger.info '*' * 100
-    Rails.logger.info player_records
-    Rails.logger.info '*' * 100
     
     active_game_id = player_records["active_game"]
 
-    Rails.logger.info '*' * 100
-    Rails.logger.info active_game_id
-    Rails.logger.info '*' * 100
-
     guess_exists = Guess.exists?(game_id: "#{active_game_id}", guess: "#{params["guess"]}")
-
-    Rails.logger.info '*' * 100
-    Rails.logger.info guess_exists
-    Rails.logger.info '*' * 100
 
     render :json => {guess_exists: "#{guess_exists}", game_id: "#{active_game_id}"}
 
@@ -55,7 +39,13 @@ class GuessesController < ApplicationController
   # POST /guesses.json
   def create
 
-    @guess = Guess.new({ guess: "#{params["guess"]}", game_id: "#{params["game_id"]}", correct_or_incorrect: "1" })
+    game_id = params["game_id"]
+
+    guess = params["guess"]
+
+    guess_handler = helpers.generate_guess_handler(game_id,guess)
+
+    @guess = Guess.new({ guess: "#{guess}", game_id: "#{game_id}", correct_or_incorrect: "#{guess_handler.guess_correct?}" })
 
     respond_to do |format|
       if @guess.save
@@ -66,6 +56,9 @@ class GuessesController < ApplicationController
         format.json { render json: @guess.errors, status: :unprocessable_entity }
       end
     end
+
+    guess_handler.update_word_display
+
   end
 
   # PATCH/PUT /guesses/1

@@ -26,10 +26,6 @@ class PlayersController < ApplicationController
   # POST /players.json
   def create
 
-    Rails.logger.info '*' * 100
-    Rails.logger.info params.inspect
-    Rails.logger.info '*' * 100
-
     slack_id = params["slack_id"]
     slack_name = params["slack_name"]
     game_id = params["game_id"]
