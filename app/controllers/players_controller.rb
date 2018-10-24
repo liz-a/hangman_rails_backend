@@ -22,6 +22,19 @@ class PlayersController < ApplicationController
   def edit
   end
 
+  # GET /player/exists/slack_id
+  def exists
+    player_exists = Player.exists?(slack_id: "#{params["slack_id"]}")
+
+    player_id = nil
+    if player_exists == true
+      player_records = Player.find_by(slack_id: "#{params["slack_id"]}")
+      player_id = player_records["id"]
+    end
+
+    render :json => {player_exists: "#{player_exists}", player_id: "#{player_id}"}
+  end
+
   # POST /players
   # POST /players.json
   def create

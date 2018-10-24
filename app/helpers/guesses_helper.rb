@@ -30,7 +30,7 @@ module GuessesHelper
       array_of_incorrect_guesses = incorrect_guesses.to_a.map! { |entry| entry["guess"] }
 
       @game = Game.find(@game_id)
-      @game.update(guessed_letters_display: "GUESSED: #{array_of_incorrect_guesses.join(" ")}")
+      @game.update(guessed_letters_display: "#{array_of_incorrect_guesses.join(" ")}")
     end
 
     def update_lives

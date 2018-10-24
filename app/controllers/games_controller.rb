@@ -28,7 +28,13 @@ class GamesController < ApplicationController
   # GET /games/exists/game_name
   def exists
     game_exists = Game.exists?(game_name: "#{params["game_name"]}")
-    render :json => {game_exists: "#{game_exists}"}
+
+    game_id = nil
+    if game_exists == true
+      game_records = Game.find_by(game_name: "#{params["game_name"]}")
+      game_id = game_records["id"]
+    end
+    render :json => {game_exists: "#{game_exists}", game_id: "#{game_id}"}
   end
 
   # POST /games

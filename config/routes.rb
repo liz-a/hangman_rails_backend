@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get "/guesses/exists/:slack_id/:guess", to: "guesses#exists"
 
+  get "/players/exists/:slack_id", to: "players#exists"
+
   # post "/slack", to: "slack#get_input"
 
   # post "/slack", to: "games#create", constraint: SlackCreateGameConstraint.new
