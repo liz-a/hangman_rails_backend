@@ -45,15 +45,12 @@ class PlayersController < ApplicationController
 
     @player = Player.new({"slack_name"=>"#{slack_name}","slack_id"=>"#{slack_id}","active_game"=>"#{game_id}"})
 
-    respond_to do |format|
-      if @player.save
-        format.html { redirect_to @player, notice: 'Player was successfully created.' }
-        format.json { render :show, status: :created, location: @player }
-      else
-        format.html { render :new }
-        format.json { render json: @player.errors, status: :unprocessable_entity }
-      end
+    if @player.save
+      render :json => {player_id: "#{@player.id}"}
+    else
+      render json: @game.errors, status: :unprocessable_entity
     end
+
   end
 
   # PATCH/PUT /players/1
