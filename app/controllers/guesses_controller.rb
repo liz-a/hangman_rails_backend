@@ -31,7 +31,10 @@ class GuessesController < ApplicationController
 
     guess_exists = Guess.exists?(game_id: "#{active_game_id}", guess: "#{params["guess"]}")
 
-    render :json => {guess_exists: "#{guess_exists}", game_id: "#{active_game_id}"}
+    game_records = Game.find(active_game_id)
+    game_name = game_records["game_name"]
+
+    render :json => {guess_exists: "#{guess_exists}", game_name: "#{game_name}"}
 
   end
 

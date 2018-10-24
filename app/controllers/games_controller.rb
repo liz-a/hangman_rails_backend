@@ -33,8 +33,11 @@ class GamesController < ApplicationController
     if game_exists == true
       game_records = Game.find_by(game_name: "#{params["game_name"]}")
       game_id = game_records["id"]
+      game_status = game_records["status"]
+      game_result = game_records["result"]
+      game_word = game_records["word"]
     end
-    render :json => {game_exists: "#{game_exists}", game_id: "#{game_id}"}
+    render :json => {game_exists: "#{game_exists}", game_id: "#{game_id}", game_status: "#{game_status}", game_result: "#{game_result}", game_word: "#{game_word}" }
   end
 
   # POST /games
