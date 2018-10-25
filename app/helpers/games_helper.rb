@@ -13,7 +13,8 @@ module GamesHelper
       @game = Game.find_by(game_name: "#{@game_name}")
       display = @word.chars.map { |char| char = "?" }.join(" ") 
       @game.update(word_display: "#{display}")
-      display + " WORD: #{@word}"
+      # display + " WORD: #{@word}"
+      display
     end
     def display_word_state
       generate_initial_word_display
